@@ -1,0 +1,39 @@
+{% load static %}
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="{% static 'assets/css/reset.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/css/demo.css' %}">
+  	
+	<title></title>
+</head>
+<body>
+	<header class="cd-main-header">
+		<div class="cd-main-header__logo">
+			<a href="{% url 'home_app:home' %}"><img src="{% static 'assets/img/cd-logo.svg' %}" alt="Logo"></a>
+		</div>
+
+		<nav class="cd-main-nav js-main-nav">
+			<ul class="cd-main-nav__list js-signin-modal-trigger">
+				<!-- inser more links here -->
+				{% if user.is_anonymous %}
+					<li><a class="cd-main-nav__item cd-main-nav__item--signin" href="{% url 'home_app:login' %}" data-signin="login">Sign in</a></li>
+					<li><a class="cd-main-nav__item cd-main-nav__item--signup" href="{% url 'home_app:register' %}" data-signin="signup">Sign up</a></li>
+				{% else %}
+					<li><a class="cd-main-nav__item cd-main-nav__item--signup" href="{% url 'home_app:logout' %}">Cerrar sesion</a></li>
+				{% endif %}
+			</ul>
+		</nav>
+	</header>
+
+	<div style="width: 800px; margin: auto;">
+		{% block content %}<h1>{% endblock %}
+	</div>
+</body>
+</html>
